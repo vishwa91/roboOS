@@ -1,0 +1,4 @@
+First README for roboOS
+
+This is a very crude operating system, which is expected to be ported to an Atmel
+AVR microcontroller. No decision has been made about the microcontroller.
