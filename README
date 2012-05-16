@@ -1,4 +1,10 @@
-First README for roboOS
+roboOS:		Codename Z
+Authors:	Vishwanath <vishwa.hyd@gmail.com>
+			Pavan	   <pavankumarreddy.93@gmail.com>
+			
+Target microcontroller:	ATmega168
+Toolchain:				avr-gcc
 
-This is a very crude operating system, which is expected to be ported to an Atmel
-AVR microcontroller. No decision has been made about the microcontroller.
+Status:					Brain storming
+
+As of now, the microcontroller has been frozen.
