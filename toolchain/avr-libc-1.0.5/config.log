@@ -1,0 +1,22 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:703: checking host system type
+configure:724: checking target system type
+configure:742: checking build system type
+configure:777: checking for a BSD compatible install
+configure:830: checking whether build environment is sane
+configure:887: checking whether make sets ${MAKE}
+configure:933: checking for working aclocal
+configure:946: checking for working autoconf
+configure:959: checking for working automake
+configure:972: checking for working autoheader
+configure:985: checking for working makeinfo
+configure:1017: checking for avr-as
+configure:1084: checking for avr-ar
+configure:1151: checking for avr-ranlib
+configure:1218: checking for avr-gcc
+configure:1312: checking for a BSD compatible install
+configure:1368: checking for doxygen
+configure:1398: checking for pngtopnm
+configure:1408: checking for pngtopnm
