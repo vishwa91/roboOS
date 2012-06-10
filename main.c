@@ -6,9 +6,11 @@
 #define F_CPU 1000000U	// The compiler gives a warning if this is not defined
 #include<util/delay.h>
 
+#define B0_out DDRB |= (1<< PB0)
+
 int main(void)
 {
-	DDRB |= (1 << PB0 );	// make PB0 output. PORTA does not exist!
+	B0_out;	// make PB0 output. PORTA does not exist!
 	while(1)
 	{
 		PORTB |= (1 << PB0);
