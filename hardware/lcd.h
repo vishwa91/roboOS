@@ -14,12 +14,12 @@
 #define PIN(x) _CONCAT(PIN,x)
 #define DDR(x) _CONCAT(DDR,x)
 
-#endif
-
 #include <avr/io.h>
 #include <util/delay.h>
 #include <inttypes.h>
 #include <stdint.h>
+#include <stdarg.h>
+#include <string.h>
 
 
 #define writeData(x)    writeToLCD(HIGH, LOW, x)
@@ -59,3 +59,7 @@ void writeToLCD(uchar, uchar, uint8_t);
 void delayWhileBusy(int);
 void moveCursorXY(uchar, uchar);
 void writeStringatPos(uchar, uchar, char *);
+void writeStringatPos(char *);
+int printfLCD(const char *, ...)
+
+#endif

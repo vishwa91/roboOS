@@ -9,7 +9,7 @@
 /****************************
         REFERENCES
  ****************************
- *roboOS/references/gif.gif
+ *roboOS/references/lcd_ref.gif
     Has all the commands that can be sent to the LCD
  
  *****************************/
@@ -153,7 +153,7 @@ void writeToLCD(uchar RS_VAL, uchar RW_VAL, uint8_t data){
  Name : delayWhileBusy 
  Description: Constantly polls busy bit and waits while LCD is busy
  Parameters: 
-    num_polls - maximum number of times function should poll
+    num_polls - maximum number of times function should poll. set it to 0 for default value
  Return: None
  Comments:
  ****************************************************************************/
@@ -219,6 +219,17 @@ void moveCursorXY(uchar x, uchar y){
     writeCmd(cmd);
 }
 
+/*************************************************************************** 
+ Name : writeStringatPos
+ Description: write a string at position given in the parameters
+ Parameters: 
+ x   - The column to which cursor should be moved
+ y   - The row to which cursor should be moved
+ str - String to be printed
+ Return: None
+ Comments:
+ ****************************************************************************/
+
 void writeStringatPos(uchar x, uchar y, char *str){
     uchar i = 0;
     
@@ -229,4 +240,103 @@ void writeStringatPos(uchar x, uchar y, char *str){
             i++;
         }
     }
+}
+
+/*************************************************************************** 
+ Name : writeString
+ Description: write a string
+ Parameters: 
+ str - String to be printed
+ Return: None
+ Comments:
+ ****************************************************************************/
+
+void writeString(char *str){
+    uchar i = 0;
+    
+    while ((i) < LCD_MAX_COL && str[i]!='\0') {
+        writeData(str[i]);
+        i++;
+    }
+}
+
+/*************************************************************************** 
+ Name : printint
+ Description: not part of API
+ Parameters: 
+ Return: 
+ Comments:
+ ****************************************************************************/
+
+
+void printint(int num){
+	if(num == 0)
+		writeData('0');
+	else{
+		int reversed;
+		int lastDig;
+		
+		if(num < 0){
+			writeData('-');
+			lastDig = -(num % 10);
+			num /= 10;
+			num *= -1;
+			reversed = lastDig;
+			//printf("\nlastDig - %d\n", lastDig);
+		}
+		
+		else{
+			reversed = num%10;
+			num /= 10;
+		}
+		
+		while(num != 0){
+			reversed *= 10;
+			reversed += num%10;
+			num /= 10;
+		}
+		
+		while(reversed != 0){
+			writeData(reversed%10 + '0');
+			reversed /= 10;
+		}
+	}
+}
+
+/*************************************************************************** 
+ Name : printfLCD
+ Description: print formatted strings to LCD. Syntax similar to C printf. Currently,
+    %d, %c, %s are supported 
+ Parameters: 
+ Return: 0 on successful completion(not like printf)
+ Comments:
+ ****************************************************************************/
+
+int printfLCD(const char *str, ...){
+	int x;
+	const char *ptr;
+	char *cpy = strdup(str);
+	
+	va_list args;
+	va_start(args, str);
+	
+	for(; *cpy != '\0'; cpy++){
+		if(*cpy != '%'){
+			writeData(*cpy);
+		}
+		else{
+			switch(*++cpy){
+				case 'c': writeData(va_arg(args, int));break;
+				case 'd': 
+					x = (va_arg(args, int));
+					printint(x);break;
+				case 's':
+                    writeString(va_arg(args, char*));break;
+			}
+		}
+	}
+	
+	va_end(args);
+	
+	return 0;
 }
