@@ -1,10 +1,10 @@
 roboOS:		Codename Z
 Authors:	Vishwanath <vishwa.hyd@gmail.com>
-			Pavan	   <pavankumarreddy.93@gmail.com>
+		Pavan	   <pavankumarreddy.93@gmail.com>
 			
 Target microcontroller:	ATmega168
-Toolchain:				avr-gcc
+Toolchain:		avr-gcc
 
-Status:					Brain storming
+Status:			Brain storming
 
 As of now, the microcontroller has been frozen.
