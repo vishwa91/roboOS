@@ -19,11 +19,13 @@
 
 #include <config.h>
 #define FOSC CONFIG_F_CPU
+#define F_CPU CONFIG_F_CPU
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdlib.h>
 
 unsigned int calculate_ubrr(int baud_rate);
 void usart_init(unsigned int baud);
@@ -32,4 +34,4 @@ unsigned int _transmit(unsigned char data);
 unsigned char _receive(void);
 
 unsigned char transmit(const char *str, ...);
-unsigned char *receive(void);
+char *receive(void);
