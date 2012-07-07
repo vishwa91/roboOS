@@ -5,6 +5,8 @@
 #include<avr/io.h>
 #define F_CPU 1000000U	// The compiler gives a warning if this is not defined
 #include<util/delay.h>
+#include"hardware/lcd.h"
+#include"hardware/lcd.c"
 
 #define B0_out DDRB |= (1<< PB0)
 
@@ -17,5 +19,7 @@ int main(void)
 		_delay_ms(500);
 		PORTB &= ~(1 << PB0);
 		_delay_ms(500);
+		initializeLCD();
+        printfLCD("This is a string %s","abcd");
 	}
 }

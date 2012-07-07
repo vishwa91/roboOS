@@ -59,7 +59,7 @@ void writeToLCD(uchar, uchar, uint8_t);
 void delayWhileBusy(int);
 void moveCursorXY(uchar, uchar);
 void writeStringatPos(uchar, uchar, char *);
-void writeStringatPos(char *);
-int printfLCD(const char *, ...)
+void writeString(char *);
+int printfLCD(const char *, ...);
 
 #endif

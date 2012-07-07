@@ -71,7 +71,6 @@ uint8_t address_locations[] = {0x00,0x40,0x20,0x60};
  ****************************************************************************/
 
 void initializeLCD(){
-    uint8_t data;
     
     // Wait for LCD to power up to initialize
     _delay_ms(30);
@@ -314,7 +313,6 @@ void printint(int num){
 
 int printfLCD(const char *str, ...){
 	int x;
-	const char *ptr;
 	char *cpy = strdup(str);
 	
 	va_list args;
