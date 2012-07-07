@@ -13,6 +13,7 @@ if [ $ret -ne 0 ]; then
 	echo 'Your module doesnt seem to work properly'
 else
 	echo 'Module is correct'
+	rm -f test.o
 fi
 
 
