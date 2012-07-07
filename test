@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ -z $1 ];then
+	echo 'Usage: test <your module>'
+	exit
+fi
+
+echo 'testing given module'
+DEVICE=atmega168
+avr-gcc -Wall -Os -mmcu=$DEVICE -o test.o -c $1 -I$PWD
+ret=$?
+if [ $ret -ne 0 ]; then
+	echo 'Your module doesnt seem to work properly'
+else
+	echo 'Module is correct'
+fi
+
+
