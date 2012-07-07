@@ -1,10 +1,18 @@
-roboOS:		Codename Z
-Authors:	Vishwanath <vishwa.hyd@gmail.com>
-		Pavan	   <pavankumarreddy.93@gmail.com>
-			
-Target microcontroller:	ATmega168
-Toolchain:		avr-gcc
+roboOS project Aims to target a simple RTOS to an AVR microcontroller.
 
-Status:			Brain storming
+Required Hardware:
+1. Atmega168
+2. AVR programmer
 
-As of now, the microcontroller has been frozen.
+Host: linux 
+	  Mac OSX 
+	  Cygwin (Windows)
+
+Required packages:
+1. gcc-avr
+2. binutils-avr
+3. avr-libc
+4. avrdude
+5. git
+6. gitk ( Or any other git browser)
+ 
