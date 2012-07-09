@@ -28,10 +28,30 @@
 #include <stdlib.h>
 
 unsigned int calculate_ubrr(int baud_rate);
-void usart_init(unsigned int baud);
+void usart_init(long int baud);
 
-unsigned int _transmit(unsigned char data);
-unsigned char _receive(void);
+unsigned int _usart_transmit(unsigned char data);
+unsigned char _usart_receive(void);
 
-unsigned char transmit(const char *str, ...);
-char *receive(void);
+unsigned char usart_transmit(const char *str, ...);
+char *usart_receive(void);
+
+/************************************************************** 
+ Name : __usart__
+ Description: In an attempt to make the code object oriented,
+ 			  the peripherals will be structs. There is one
+ 			  drawback. The peripherals must be initialised,
+ 			  since there are function pointers.
+ Parameters: Not defined 
+ 
+ Return: Not defined
+ Comments: None
+ *************************************************************/
+struct __usart__{
+	long int BAUD;
+	unsigned char BUSY;
+	void (*init)(long int);
+	unsigned char (*transmit)(const char *, ...);
+	char * (*receive)(void);
+};
+typedef struct __usart__ usart;

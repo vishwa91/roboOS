@@ -14,6 +14,8 @@
 #define PIN(x) _CONCAT(PIN,x)
 #define DDR(x) _CONCAT(DDR,x)
 
+#include <config.h>
+#define F_CPU CONFIG_F_CPU
 #include <avr/io.h>
 #include <util/delay.h>
 #include <inttypes.h>

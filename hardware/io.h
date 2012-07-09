@@ -11,44 +11,53 @@ Module: io.h
 Dependencies: None
 
 Description: This file has the structs for 
-			 manipulating the GPIO pins
+			 manipulating the GPIO unsigned char pins
 
 Note: <Notes if any>.
 ************************************************/
+#include <avr/io.h>
 
-struct portB{
-	pin0 = PORTB | (1 << PB0);
-	pin1 = PORTB | (1 << PB1);
-	pin2 = PORTB | (1 << PB2);
-	pin3 = PORTB | (1 << PB3);
-	pin4 = PORTB | (1 << PB4);
-	pin5 = PORTB | (1 << PB5);
-	pin6 = PORTB | (1 << PB6);
-	pin7 = PORTB | (1 << PB7);
+struct __port__{
+	unsigned char pin0;
+	unsigned char pin1;
+	unsigned char pin2;
+	unsigned char pin3;
+	unsigned char pin4;
+	unsigned char pin5;
+	unsigned char pin6;
+	unsigned char pin7;
+	
+	void (* set )(unsigned char);
+	void (* clr )(unsigned char);
+	void (*mkin )(unsigned char);
+	void (*mkout )(unsigned char);
+	void ( *read )(unsigned char);
 };
+typedef struct __port__ port;
 
-struct portC{
-	pin0 = PORTC | (1 << PC0);
-	pin1 = PORTC | (1 << PC1);
-	pin2 = PORTC | (1 << PC2);
-	pin3 = PORTC | (1 << PC3);
-	pin4 = PORTC | (1 << PC4);
-	pin5 = PORTC | (1 << PC5);
-	pin6 = PORTC | (1 << PC6);
+struct __io__{
+	struct __port__ portB;
+	struct __port__ portC;
+	struct __port__ portD;
 };
+typedef struct __io__ io;
 
-struct portD{
-	pin0 = PORTD | (1 << PD0);
-	pin1 = PORTD | (1 << PD1);
-	pin2 = PORTD | (1 << PD2);
-	pin3 = PORTD | (1 << PD3);
-	pin4 = PORTD | (1 << PD4);
-	pin5 = PORTD | (1 << PD5);
-	pin6 = PORTD | (1 << PD6);
-	pin7 = PORTA | (1 << PD7);
-};
+void set_portB( unsigned char pin );
+void set_portC( unsigned char pin );
+void set_portD( unsigned char pin );
 
-void make_pin_high( unsigned char pin );
-void make_pin_low( unsigned char pin );
-void make_pin_out( unsigned char pin );
-void make_pin_in(unsigned char pin );
+void clr_portB( unsigned char pin );
+void clr_portC( unsigned char pin );
+void clr_portD( unsigned char pin );
+
+void mkin_portB( unsigned char pin );
+void mkin_portC( unsigned char pin );
+void mkin_portD( unsigned char pin );
+
+void mkout_portB( unsigned char pin );
+void mkout_portC( unsigned char pin );
+void mkout_portD( unsigned char pin );
+
+unsigned char read_portB( unsigned char pin );
+unsigned char read_portC( unsigned char pin );
+unsigned char read_portD( unsigned char pin );

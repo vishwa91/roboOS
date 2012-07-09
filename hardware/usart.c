@@ -38,7 +38,7 @@ unsigned int calculate_ubrr(int baud_rate){
  Comments: None
  *************************************************************/
 
-void usart_init(unsigned int baud){
+void usart_init(long int baud){
 	unsigned int ubrr = calculate_ubrr(baud);		// Calculate the UBRR value
 		
 	UBRR0H = (unsigned char) (ubrr >> 8);			// Assign the high byte and the low byte
@@ -140,22 +140,4 @@ char *usart_receive(void){
 	return input_string;
 }
 
-/************************************************************** 
- Name : __usart__
- Description: In an attempt to make the code object oriented,
- 			  the peripherals will be structs. There is one
- 			  drawback. The peripherals must be initialised,
- 			  since there are function pointers.
- Parameters: Not defined 
- 
- Return: Not defined
- Comments: None
- *************************************************************/
-struct __usart__{
-	long int BAUD;
-	unsigned char BUSY;
-	void (*init)(long int);
-	void (*transmit)(unsigned char *);
-	unsigned char * (*receive)(void);
-};
-typedef struct __usart__ usart;
+

@@ -22,41 +22,44 @@
 #include <hardware/usart.h>
 #include <hardware/lcd.h>
 
-void init_peripheral(unsigned char ID, ...){
+void init_peripheral(int ID, ...){
 	va_list device;
 	va_start(device, ID);
-	
-	switch(ID){
-			case IO: config_io *io;
-					 config_io = va_args(device, *io);
-					 *config_io.portB.set = set_portB;
-					 *config_io.portB.clr = clr_portB;
-					 *config_io.portB.mkin = mkin_portB;
-					 *config_io.portB.mkout = mkout_portB;
-					 
-					 *config_io.portC.set = set_portC;
-					 *config_io.portC.clr = clr_portC;
-					 *config_io.portC.mkin = mkin_portC;
-					 *config_io.portC.mkout = mkout_portC;
-					 
-					 *config_io.portD.set = set_portD;
-					 *config_io.portD.clr = clr_portD;
-					 *config_io.portD.mkin = mkin_portD;
-					 *config_io.portD.mkout = mkout_portD;
-			break;
-			
-		case LCD: 	config_lcd *lcd;
-				 	config_lcd = va_args(device, *lcd);
-				 //Set necessary params here
-			break;
-			
-		case USART: config_usart *usart;
-					config_usart = va_args(device, *usart);
-					*config_usart.init = usart_init;
-					*config_usart.transmit = usart_transmit;
-					*config_usart.receive = usart_receive;
-					*config_usart.BUSY = FALSE;
-			break;
+		
+	if( ID == IO ){
 
+		struct __io__ * config_io;
+		config_io = va_arg(device, io * );
+		(*config_io).portB.set = set_portB;
+		(*config_io).portB.clr = clr_portB;
+		(*config_io).portB.mkin = mkin_portB;
+		(*config_io).portB.mkout = mkout_portB;
+		
+		(*config_io).portC.set = set_portC;
+		(*config_io).portC.clr = clr_portC;
+		(*config_io).portC.mkin = mkin_portC;
+		(*config_io).portC.mkout = mkout_portC;
+			
+		(*config_io).portD.set = set_portD;
+		(*config_io).portD.clr = clr_portD;
+		(*config_io).portD.mkin = mkin_portD;
+		(*config_io).portD.mkout = mkout_portD;
 	}
+	
+	else if( ID == LCD ){		
+		lcd * config_lcd;
+		config_lcd = va_arg(device, lcd * );
+		 //Set necessary params here
+	}
+			
+	else if( ID == USART){
+		usart *config_usart;
+		config_usart = va_arg(device, usart * );
+		(*config_usart).init = usart_init;
+		(*config_usart).transmit = usart_transmit;
+		(*config_usart).receive = usart_receive;
+	}
+
+	
+	va_end(device);
 }
