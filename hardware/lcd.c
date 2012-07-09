@@ -25,11 +25,10 @@
     
 */
 
-uint8_t address_locations[] = {0x00,0x40,0x20,0x60};
-
 
 
 /**************************************/
+#include "lcd.h"
 
 #define LCD_DATA_PORT 	PORT(LCD_DATA)
 #define LCD_E_PORT 		PORT(LCD_E)
@@ -58,6 +57,8 @@ uint8_t address_locations[] = {0x00,0x40,0x20,0x60};
 #ifdef LCD_TYPE_202
 #define LCD_TYPE_204
 #endif
+
+uint8_t address_locations[] = {0x00,0x40,0x20,0x60};
 
 /* Global/ Exported functions */
 

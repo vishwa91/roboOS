@@ -46,9 +46,10 @@ void init_peripheral(int ID, ...){
 		(*config_io).portD.mkout = mkout_portD;
 	}
 	
-	else if( ID == LCD ){		
-		lcd * config_lcd;
-		config_lcd = va_arg(device, lcd * );
+	else if( ID == LCD ){	
+        // lcd struct not yet defined
+		//lcd * config_lcd;
+		//config_lcd = va_arg(device, lcd * );
 		 //Set necessary params here
 	}
 			
