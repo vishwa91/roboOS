@@ -1,116 +1,79 @@
+/************************************************
+Copyright(c) 2012 The roboOS open source project.
+
+This software is compatible with GPLv3. For 
+further support, visit:
+http://www.gnu.org/copyleft/gpl.html
+
+=================================================
+
+Module: io.c
+Dependencies: hardware/io.h
+
+Description: This file has the structs for 
+			 manipulating the GPIO unsigned char pins
+
+Note: <Notes if any>.
+************************************************/
+#include <hardware/io.h>
 #include <avr/io.h>
 
-// PORTB macros
+void set_portB(unsigned char pin){
+	PORTB |= pin;
+}
 
-#define make_B0_out DDRB |= (1 << PB0)
-#define make_B1_out DDRB |= (1 << PB1)
-#define make_B2_out DDRB |= (1 << PB2)
-#define make_B3_out DDRB |= (1 << PB3)
-#define make_B4_out DDRB |= (1 << PB4)
-#define make_B5_out DDRB |= (1 << PB5)
-#define make_B6_out DDRB |= (1 << PB6)
-#define make_B7_out DDRB |= (1 << PB7)
+void set_portC(unsigned char pin){
+	PORTC |= pin;
+}
 
-#define make_B0_in 	DDRB &= ~(1 << PB0)
-#define make_B1_in 	DDRB &= ~(1 << PB1)
-#define make_B2_in 	DDRB &= ~(1 << PB2)
-#define make_B3_in 	DDRB &= ~(1 << PB3)
-#define make_B4_in 	DDRB &= ~(1 << PB4)
-#define make_B5_in 	DDRB &= ~(1 << PB5)
-#define make_B6_in 	DDRB &= ~(1 << PB6)
-#define make_B7_in 	DDRB &= ~(1 << PB7)
+void set_portD(unsigned char pin){
+	PORTD |= pin;
+}
 
-#define B0_on	   	PORTB |= (1 << PB0)
-#define B1_on	   	PORTB |= (1 << PB1)
-#define B2_on	   	PORTB |= (1 << PB2)
-#define B3_on	   	PORTB |= (1 << PB3)
-#define B4_on	   	PORTB |= (1 << PB4)
-#define B5_on	   	PORTB |= (1 << PB5)
-#define B6_on	   	PORTB |= (1 << PB6)
-#define B7_on	   	PORTB |= (1 << PB7)
+void clr_portB(unsigned char pin){
+	PORTB &= ~pin;
+}
 
-#define B0_off	   	PORTB &= ~(1 << PB0)
-#define B1_off	   	PORTB &= ~(1 << PB1)
-#define B2_off	   	PORTB &= ~(1 << PB2)
-#define B3_off	   	PORTB &= ~(1 << PB3)
-#define B4_off	   	PORTB &= ~(1 << PB4)
-#define B5_off	   	PORTB &= ~(1 << PB5)
-#define B6_off	   	PORTB &= ~(1 << PB6)
-#define B7_off	   	PORTB &= ~(1 << PB7)
+void clr_portC(unsigned char pin){
+	PORTC &= ~pin;
+}
 
-// PORTC macros
+void clr_portD(unsigned char pin){
+	PORTD &= ~pin;
+}
 
-#define make_C0_out DDRC |= (1 << PC0)
-#define make_C1_out DDRC |= (1 << PC1)
-#define make_C2_out DDRC |= (1 << PC2)
-#define make_C3_out DDRC |= (1 << PC3)
-#define make_C4_out DDRC |= (1 << PC4)
-#define make_C5_out DDRC |= (1 << PC5)
-#define make_C6_out DDRC |= (1 << PC6)
-#define make_C7_out DDRC |= (1 << PC7)
+void mkin_portB(unsigned char pin){
+	DDRB &= ~pin;
+}
 
-#define make_C0_in 	DDRC &= ~(1 << PC0)
-#define make_C1_in 	DDRC &= ~(1 << PC1)
-#define make_C2_in 	DDRC &= ~(1 << PC2)
-#define make_C3_in 	DDRC &= ~(1 << PC3)
-#define make_C4_in 	DDRC &= ~(1 << PC4)
-#define make_C5_in 	DDRC &= ~(1 << PC5)
-#define make_C6_in 	DDRC &= ~(1 << PC6)
-#define make_C7_in 	DDRC &= ~(1 << PC7)
+void mkin_portC(unsigned char pin){
+	DDRC &= ~pin;
+}
 
-#define C0_on	   	PORTC |= (1 << PC0)
-#define C1_on	   	PORTC |= (1 << PC1)
-#define C2_on	   	PORTC |= (1 << PC2)
-#define C3_on	   	PORTC |= (1 << PC3)
-#define C4_on	   	PORTC |= (1 << PC4)
-#define C5_on	   	PORTC |= (1 << PC5)
-#define C6_on	   	PORTC |= (1 << PC6)
-#define C7_on	   	PORTC |= (1 << PC7)
+void mkin_portD(unsigned char pin){
+	DDRD &= ~pin;
+}
 
-#define C0_off	   	PORTB &= ~(1 << PC0)
-#define C1_off	   	PORTB &= ~(1 << PC1)
-#define C2_off	   	PORTB &= ~(1 << PC2)
-#define C3_off	   	PORTB &= ~(1 << PC3)
-#define C4_off	   	PORTB &= ~(1 << PC4)
-#define C5_off	   	PORTB &= ~(1 << PC5)
-#define C6_off	   	PORTB &= ~(1 << PC6)
-#define C7_off	   	PORTB &= ~(1 << PC7)
+void mkout_portB(unsigned char pin){
+	DDRB |= pin;
+}
 
-// PORTD macros
+void mkout_portC(unsigned char pin){
+	DDRC |= pin;
+}
 
-#define make_D0_out DDRD |= (1 << PD0)
-#define make_D1_out DDRD |= (1 << PD1)
-#define make_D2_out DDRD |= (1 << PD2)
-#define make_D3_out DDRD |= (1 << PD3)
-#define make_D4_out DDRD |= (1 << PD4)
-#define make_D5_out DDRD |= (1 << PD5)
-#define make_D6_out DDRD |= (1 << PD6)
-#define make_D7_out DDRD |= (1 << PD7)
+void mkout_portD(unsigned char pin){
+	DDRD |= pin;
+}
 
-#define make_D0_in 	DDRD &= ~(1 << PD0)
-#define make_D1_in 	DDRD &= ~(1 << PD1)
-#define make_D2_in 	DDRD &= ~(1 << PD2)
-#define make_D3_in 	DDRD &= ~(1 << PD3)
-#define make_D4_in 	DDRD &= ~(1 << PD4)
-#define make_D5_in 	DDRD &= ~(1 << PD5)
-#define make_D6_in 	DDRD &= ~(1 << PD6)
-#define make_D7_in 	DDRD &= ~(1 << PD7)
+unsigned char read_portB(unsigned char pin){
+	return PINB & pin;
+}
 
-#define D0_on	   	PORTD |= (1 << PD0)
-#define D1_on	   	PORTD |= (1 << PD1)
-#define D2_on	   	PORTD |= (1 << PD2)
-#define D3_on	   	PORTD |= (1 << PD3)
-#define D4_on	   	PORTD |= (1 << PD4)
-#define D5_on	   	PORTD |= (1 << PD5)
-#define D6_on	   	PORTD |= (1 << PD6)
-#define D7_on	   	PORTD |= (1 << PD7)
+unsigned char read_portC(unsigned char pin){
+	return PINC & pin;
+}
 
-#define D0_off	   	PORTD &= ~(1 << PD0)
-#define D1_off	   	PORTD &= ~(1 << PD1)
-#define D2_off	   	PORTD &= ~(1 << PD2)
-#define D3_off	   	PORTD &= ~(1 << PD3)
-#define D4_off	   	PORTD &= ~(1 << PD4)
-#define D5_off	   	PORTD &= ~(1 << PD5)
-#define D6_off	   	PORTD &= ~(1 << PD6)
-#define D7_off	   	PORTD &= ~(1 << PD7)
-
+unsigned char read_portD(unsigned char pin){
+	return PIND & pin;
+}
