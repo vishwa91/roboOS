@@ -22,6 +22,6 @@
 // need to initialise the peripherals due to function pointers
 // in them. To do so, we will use only one function.
 
-#define IO 				0x01
-#define USART			0x02
-#define LCD				0x03
+#define IO 			001
+#define USART		002
+#define LCD			003
