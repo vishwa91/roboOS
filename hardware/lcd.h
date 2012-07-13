@@ -58,10 +58,25 @@ typedef unsigned char uchar;
 
 void initializeLCD();
 void writeToLCD(uchar, uchar, uint8_t);
-void delayWhileBusy(int);
+void _delayWhileBusy(int);
 void moveCursorXY(uchar, uchar);
 void writeStringatPos(uchar, uchar, char *);
 void writeString(char *);
+void _printint(int);
 int printfLCD(const char *, ...);
+
+/************************************************************
+ Name : _lcd_
+ Type : struct
+ Description :  An attempt to make the code object oriented
+                by making them structs with member variables
+                and functional pointers
+ ************************************************************/
+struct __lcd__{
+    void (*init)(); // No customization for init until the module is tested
+    int (*printf)(const char *, ...);
+};
+
+typedef struct __lcd__ lcd;
 
 #endif

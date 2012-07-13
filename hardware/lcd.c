@@ -28,7 +28,7 @@
 
 
 /**************************************/
-#include "lcd.h"
+#include <hardware/lcd.h>
 
 #define LCD_DATA_PORT 	PORT(LCD_DATA)
 #define LCD_E_PORT 		PORT(LCD_E)
@@ -145,7 +145,7 @@ void writeToLCD(uchar RS_VAL, uchar RW_VAL, uint8_t data){
     
     _delay_us(1);
     
-    delayWhileBusy(0);
+    _delayWhileBusy(0);
 }
 
 
@@ -158,7 +158,7 @@ void writeToLCD(uchar RS_VAL, uchar RW_VAL, uint8_t data){
  Comments:
  ****************************************************************************/
 
-void delayWhileBusy(int num_polls){
+void _delayWhileBusy(int num_polls){
     uint8_t busy;
     int timeout = 100; // Default value of 100 loops for timeout
     
@@ -269,7 +269,7 @@ void writeString(char *str){
  ****************************************************************************/
 
 
-void printint(int num){
+void _printint(int num){
 	if(num == 0)
 		writeData('0');
 	else{
@@ -328,7 +328,7 @@ int printfLCD(const char *str, ...){
 				case 'c': writeData(va_arg(args, int));break;
 				case 'd': 
 					x = (va_arg(args, int));
-					printint(x);break;
+					_printint(x);break;
 				case 's':
                     writeString(va_arg(args, char*));break;
 			}

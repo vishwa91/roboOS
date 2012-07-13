@@ -47,10 +47,11 @@ void init_peripheral(int ID, ...){
 	}
 	
 	else if( ID == LCD ){	
-        // lcd struct not yet defined
-		//lcd * config_lcd;
-		//config_lcd = va_arg(device, lcd * );
-		 //Set necessary params here
+		lcd * config_lcd;
+		config_lcd = va_arg(device, lcd * );
+		 //Setting necessary params here
+        (*config_lcd).init = initializeLCD;
+        (*config_lcd).printf = printfLCD;
 	}
 			
 	else if( ID == USART){
