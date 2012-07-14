@@ -4,9 +4,9 @@ Required Hardware:
 1. Atmega168
 2. AVR programmer
 
-Host: linux 
-	  Mac OSX 
-	  Cygwin (Windows)
+Host: 	linux 
+	Mac OSX 
+	Cygwin (Windows)
 
 Required packages:
 1. gcc-avr
