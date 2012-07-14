@@ -36,6 +36,8 @@ unsigned char _usart_receive(void);
 unsigned char usart_transmit(const char *str, ...);
 char *usart_receive(void);
 
+void _transmit_int(int);
+
 /************************************************************** 
  Name : __usart__
  Description: In an attempt to make the code object oriented,

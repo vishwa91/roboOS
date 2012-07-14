@@ -85,6 +85,49 @@ unsigned char _usart_receive(void){
 }
 
 /************************************************************** 
+ Name : _transmit_int
+ Description: transmits an integer.
+ Parameters: An integer 
+ 
+ Return: None
+ Comments: Not part of API
+ *************************************************************/
+void _transmit_int(int num){
+	if(num == 0)
+		_usart_transmit('0');
+	else{
+		int reversed;
+		int lastDig;
+		
+		if(num < 0){
+			_usart_transmit('-');
+			lastDig = -(num % 10);
+			num /= 10;
+			num *= -1;
+			reversed = lastDig;
+			//printf("\nlastDig - %d\n", lastDig);
+		}
+		
+		else{
+			reversed = num%10;
+			num /= 10;
+		}
+		
+		while(num != 0){
+			reversed *= 10;
+			reversed += num%10;
+			num /= 10;
+		}
+		
+		while(reversed != 0){
+			_usart_transmit(reversed%10 + '0');
+			reversed /= 10;
+		}
+	}
+}
+
+
+/************************************************************** 
  Name : transmit
  Description: Send a line of data. Similar to printf, but it is 
  			  written to USART
@@ -105,7 +148,7 @@ unsigned char usart_transmit(const char *str, ...){
 			switch(*token++){
 				case 'c': _transmit(va_arg(tokens, int));
 					break;
-				case 'd': _transmit(va_arg(tokens, int)+'0');
+				case 'd': _transmit_int(va_arg(tokens, int));
 					break;
 				case 's':transmit(va_arg(tokens, char*));	// carefully observe that this line calls the function again.
 					break;
